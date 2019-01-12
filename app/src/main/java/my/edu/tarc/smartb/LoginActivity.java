@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     preferencesEditor.apply();
 
-                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                                    intent.putExtra("name",name);
 //                                    intent.putExtra("studID",studID);
 //                                    intent.putExtra("programme",programme);

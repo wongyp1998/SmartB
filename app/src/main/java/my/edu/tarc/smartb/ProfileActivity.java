@@ -12,11 +12,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView contactNo,nric,name,email,studID,programme,faculty;
     private Button btn_logout;
-    SharedPreferences sharedPreferences = getSharedPreferences("my.edu.tarc.smartb",MODE_PRIVATE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("my.edu.tarc.smartb",MODE_PRIVATE);
 
         name =  findViewById(R.id.tvName);
         email =  findViewById(R.id.tvEmail);
