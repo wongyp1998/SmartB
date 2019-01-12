@@ -1,5 +1,7 @@
 package my.edu.tarc.smartb;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private SharedPreferences mPreferences;
+    private String sharedPrefFile = "my.edu.tarc.smartb";
     private EditText txtStudID, txtPassword;
     private Button btnLogin;
     private static String URL_LOGIN = "https://yapsm-wa16.000webhostapp.com/StudentLogin.php";
@@ -37,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         txtStudID = findViewById(R.id.txtStudID);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogin = findViewById(R.id.btnLogin);
-
+        mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,18 +74,43 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(success.equals("1")){
 
-                                for(int i = 0; i < jsonArray.length(); i++){
+                                for(int i = 0; i < jsonArray.length(); i++) {
 
                                     JSONObject object = jsonArray.getJSONObject(i);
+
 
                                     // To display the toast which says the status of login
                                     String studID = object.getString("studID").trim();
                                     String name = object.getString("name").trim();
+                                    String programme = object.getString("programme").trim();
+                                    String faculty = object.getString("faculty").trim();
+                                    String email = object.getString("email").trim();
+                                    String contactNo = object.getString("contactNo").trim();
+                                    String nric = object.getString("nric").trim();
 
-                                    Toast.makeText(LoginActivity.this,
-                                            "Success Login. \nYour ID: "
-                                            +studID+"\nYour Name: "+name, Toast.LENGTH_SHORT).show();
+
+                                    SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                                    preferencesEditor.putString("ID_KEY", studID);
+                                    preferencesEditor.putString("NAME_KEY", name);
+                                    preferencesEditor.putString("PROGRAMME_KEY", programme);
+                                    preferencesEditor.putString("FACULTY_KEY", faculty);
+                                    preferencesEditor.putString("EMAIL_KEY", email);
+                                    preferencesEditor.putString("CONTACT_KEY", contactNo);
+                                    preferencesEditor.putString("NRIC_KEY", nric);
+
+                                    preferencesEditor.apply();
+
+                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+//                                    intent.putExtra("name",name);
+//                                    intent.putExtra("studID",studID);
+//                                    intent.putExtra("programme",programme);
+//                                    intent.putExtra("faculty",faculty);
+//                                    intent.putExtra("email",email);
+//                                    intent.putExtra("contactNo",contactNo);
+//                                    intent.putExtra("nric",nric);
+                                    startActivity(intent);
                                 }
+
                             } else {
                                 Toast.makeText(LoginActivity.this,
                                         "Failed to login", Toast.LENGTH_SHORT).show();
