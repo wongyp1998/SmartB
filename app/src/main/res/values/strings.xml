@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SmartB</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_landing">LandingActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Tunku Abdul Rahman University College</string>
+    <string name="nav_header_subtitle">info@tarc.edu.my</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="booking">Booking</string>
+    <string name="profile">Profile</string>
+</resources>
