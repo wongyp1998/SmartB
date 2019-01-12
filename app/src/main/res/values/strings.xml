@@ -13,4 +13,7 @@
     <string name="contact_us">Contact Us</string>
     <string name="booking">Booking</string>
     <string name="profile">Profile</string>
+    <string name="app_info">App Info</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>
