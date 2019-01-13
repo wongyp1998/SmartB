@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = object.getString("email").trim();
                                     String contactNo = object.getString("contactNo").trim();
                                     String nric = object.getString("nric").trim();
+                                    String image = object.getString("image").trim();
 
 
                                     SharedPreferences.Editor preferencesEditor = mPreferences.edit();
@@ -99,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                                     preferencesEditor.putString("EMAIL_KEY",email);
                                     preferencesEditor.putString("CONTACT_KEY",contactNo);
                                     preferencesEditor.putString("NRIC_KEY",nric);
+                                    preferencesEditor.putString("IMAGE_KEY",image);
 
                                     preferencesEditor.apply();
 
