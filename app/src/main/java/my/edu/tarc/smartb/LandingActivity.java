@@ -84,7 +84,7 @@ public class LandingActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_contactUs) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_appInfo) {
 
         } else if (id == R.id.nav_disclaimer) {
