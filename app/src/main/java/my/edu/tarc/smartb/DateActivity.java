@@ -147,7 +147,6 @@ public class DateActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(DateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-//                        starttime.setText(selectedHour + ":" + selectedMinute);
                         starttime.setText(String.format("%02d:%02d", selectedHour,selectedMinute) );
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -167,7 +166,6 @@ public class DateActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(DateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-//                        endtime.setText(selectedHour + ":" + selectedMinute);
                         endtime.setText(String.format("%02d:%02d", selectedHour,selectedMinute) );
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -202,8 +200,19 @@ public class DateActivity extends AppCompatActivity {
                     long diffMinutes = diff / (60 * 1000) % 60;
                     long diffHours = diff / (60 * 60 * 1000) % 24;
 
-                    duration.setText(diffHours + " Hrs " + diffMinutes + " Min");
 
+                    if(diffHours >= 1 && diffHours < 5) {
+                        duration.setText(diffHours + " Hrs " + diffMinutes + " Min");
+                    }else if(diffHours >= 5){
+                        Toast.makeText(DateActivity.this,"Student cannot take more than 4 hours",Toast.LENGTH_LONG).show();
+                        reload();
+                    }else if(diffHours == 0) {
+                        Toast.makeText(DateActivity.this, "Student should take more than 1 hours", Toast.LENGTH_LONG).show();
+                        reload();
+                    }else{
+                        Toast.makeText(DateActivity.this, "Student must select correct time", Toast.LENGTH_LONG).show();
+                        reload();
+                    }
                 } catch (Exception ex) {
                     Toast.makeText(DateActivity.this, "Something Error!", Toast.LENGTH_SHORT).show();
                 }
@@ -332,6 +341,14 @@ public class DateActivity extends AppCompatActivity {
         dateView.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
 
-
+//  To restart the activity after wrong input (starttime and endtime)
+    public void reload() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
 }
 
