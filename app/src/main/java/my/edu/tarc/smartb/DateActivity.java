@@ -269,7 +269,7 @@ public class DateActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 progressDialog.dismiss();
-                Toast.makeText(DateActivity.this, response, Toast.LENGTH_LONG).show();
+                Toast.makeText(DateActivity.this, "Booking is successful.", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

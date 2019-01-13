@@ -10,7 +10,7 @@ import my.edu.tarc.smartb.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2700;
+    private final int SPLASH_DISPLAY_LENGTH = 2300;
 
     @Override
     public void onCreate(Bundle icicle) {

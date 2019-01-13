@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Bitmap bitmap;
     CircleImageView profileview;
     String getID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +100,9 @@ public class ProfileActivity extends AppCompatActivity {
         faculty.setText(extraFaculty);
         programme.setText(extraProgramme);
         contactNo.setText(extraContactNo);
-        Picasso.get().load(extraimage).into(profileview);
+        if(!extraimage.equals("")) {
+            Picasso.get().load(extraimage).into(profileview);
+        }
 
         //clear all the shared preference file's contents and activity state to avoid user back to the previous screen after log out
         btn_logout.setOnClickListener(new View.OnClickListener() {
