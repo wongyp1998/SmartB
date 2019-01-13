@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -57,6 +58,7 @@ public class DateActivity extends AppCompatActivity {
     private TextView endtime;
     private TextView duration;
     private Button confirmButton;
+    private Button cancelButton;
 
     private RadioGroup radiogroupValue;
     RequestQueue requestQueue;
@@ -84,6 +86,7 @@ public class DateActivity extends AppCompatActivity {
         endtime = (TextView) findViewById(R.id.editText2);
         duration = (TextView) findViewById(R.id.editText);
         confirmButton = findViewById(R.id.button);
+        cancelButton = findViewById(R.id.btnCancel2);
         radiogroupValue = findViewById(R.id.radioGroupBooking);
 
         requestQueue = Volley.newRequestQueue(DateActivity.this);
@@ -92,8 +95,48 @@ public class DateActivity extends AppCompatActivity {
         mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
         getID = mPreferences.getString("ID_KEY","");
 
+        String FacilityID = getIntent().getStringExtra("FacID");
 
-        starttime.setOnClickListener(new View.OnClickListener() {
+        RadioButton rbCourt1 = findViewById(R.id.rbcourt1);
+        RadioButton rbCourt2 = findViewById(R.id.rbcourt2);
+        RadioButton rbCourt3 = findViewById(R.id.rbcourt3);
+        RadioButton rbCourt4 = findViewById(R.id.rbcourt4);
+        RadioButton rbCourt5 = findViewById(R.id.rbcourt5);
+        RadioButton rbCourt6 = findViewById(R.id.rbcourt6);
+
+
+        if(FacilityID.equals("SBC1")){
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        } else if(FacilityID.equals("COD2")){
+            rbCourt4.setVisibility(View.INVISIBLE);
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        } else if(FacilityID.equals("COD1")){
+            rbCourt3.setVisibility(View.INVISIBLE);
+            rbCourt4.setVisibility(View.INVISIBLE);
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        } else if(FacilityID.equals("SCS1")){
+            rbCourt3.setVisibility(View.INVISIBLE);
+            rbCourt4.setVisibility(View.INVISIBLE);
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        } else if(FacilityID.equals("SBC3")){
+            rbCourt2.setVisibility(View.INVISIBLE);
+            rbCourt3.setVisibility(View.INVISIBLE);
+            rbCourt4.setVisibility(View.INVISIBLE);
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        } else if(FacilityID.equals("CSC2")){
+            rbCourt2.setVisibility(View.INVISIBLE);
+            rbCourt3.setVisibility(View.INVISIBLE);
+            rbCourt4.setVisibility(View.INVISIBLE);
+            rbCourt5.setVisibility(View.INVISIBLE);
+            rbCourt6.setVisibility(View.INVISIBLE);
+        }
+
+            starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -104,7 +147,8 @@ public class DateActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(DateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        starttime.setText(selectedHour + ":" + selectedMinute);
+//                        starttime.setText(selectedHour + ":" + selectedMinute);
+                        starttime.setText(String.format("%02d:%02d", selectedHour,selectedMinute) );
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -123,7 +167,8 @@ public class DateActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(DateActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        endtime.setText(selectedHour + ":" + selectedMinute);
+//                        endtime.setText(selectedHour + ":" + selectedMinute);
+                        endtime.setText(String.format("%02d:%02d", selectedHour,selectedMinute) );
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -180,7 +225,11 @@ public class DateActivity extends AppCompatActivity {
 
                 int courtid = radiogroupValue.getCheckedRadioButtonId();
 
-                if (courtid == R.id.rbcourt4) {
+                if(courtid == R.id.rbcourt6) {
+                    courtNumber = " Court 6";
+                } else if(courtid == R.id.rbcourt5) {
+                    courtNumber = " Court 5";
+                } else if (courtid == R.id.rbcourt4) {
                     courtNumber = " Court 4";
                 } else if (courtid == R.id.rbcourt3) {
                     courtNumber = " Court 3";
@@ -192,6 +241,14 @@ public class DateActivity extends AppCompatActivity {
 
                 valueGetFrom(bookingDate, bookingStartTime, bookingEndTime, bookingDuration, courtNumber);
 
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DateActivity.this, BookingActivity.class);
+                startActivity(intent);
             }
         });
 
