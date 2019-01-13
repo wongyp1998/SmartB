@@ -63,7 +63,7 @@ public class DateActivity extends AppCompatActivity {
     private RadioGroup radiogroupValue;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    String URL= "https://yapsm-wa16.000webhostapp.com/insertBadmintonBook.php";
+    String URL= "https://yapsm-wa16.000webhostapp.com/insert_Booking.php";
 
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "my.edu.tarc.smartb";
@@ -256,8 +256,7 @@ public class DateActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DateActivity.this, BookingActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
