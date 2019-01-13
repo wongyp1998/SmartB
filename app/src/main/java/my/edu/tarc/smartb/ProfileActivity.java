@@ -75,6 +75,9 @@ public class ProfileActivity extends AppCompatActivity {
         programme.setText(extraProgramme);
         contactNo.setText(extraContactNo);
 
+        email.setFocusableInTouchMode(false);
+        contactNo.setFocusableInTouchMode(false);
+
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
