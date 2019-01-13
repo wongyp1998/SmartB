@@ -29,4 +29,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="user_profile_picture">User profile picture</string>
+    <string name="faculty">Faculty</string>
+    <string name="course">Course</string>
 </resources>

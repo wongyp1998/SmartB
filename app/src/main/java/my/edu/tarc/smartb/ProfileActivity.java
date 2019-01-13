@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 //        String extraProgramme = intent.getStringExtra("programme");
 //        String extraFaculty = intent.getStringExtra("faculty");
 
+        // Retrieve data from shared preferences
         String extraName = mPreferences.getString("NAME_KEY","");
         String extraEmail = mPreferences.getString("EMAIL_KEY","");
         String extraContactNo = mPreferences.getString("CONTACT_KEY","");
@@ -85,6 +87,13 @@ public class ProfileActivity extends AppCompatActivity {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPreferences = getSharedPreferences(sharedPrefFile,MODE_PRIVATE);
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                preferencesEditor.clear();
+                preferencesEditor.commit();
+                Intent intent = new Intent(ProfileActivity.this,LandingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 finish();
             }
         });
@@ -130,6 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 return true;
+            
                 default:return super.onOptionsItemSelected(item);
         }
     }
@@ -156,12 +166,14 @@ public class ProfileActivity extends AppCompatActivity {
                         preferencesEditor.putString("ID_KEY",studID);
                         preferencesEditor.putString("EMAIL_KEY",email);
                         preferencesEditor.putString("CONTACT_KEY",contactNo);
-
+                      
+                        preferencesEditor.apply();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    Toast.makeText(ProfileActivity.this,"Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                  
+                    Toast.makeText(ProfileActivity.this,"JSONError" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -169,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ProfileActivity.this,"Error" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this,"VolleyError" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                 })
@@ -180,7 +192,8 @@ public class ProfileActivity extends AppCompatActivity {
                 params.put("email",email);
                 params.put("contactNo",contactNo);
                 params.put("studID",studID) ;
-                return super.getParams();
+                return params;
+
             }
         };
 
