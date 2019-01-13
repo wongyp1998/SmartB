@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -23,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_booking:
                     mTextMessage.setText("Booking");
+                    intent = new Intent(MainActivity.this,BookingActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText("Profile");
-                    Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                    intent = new Intent(MainActivity.this,ProfileActivity.class);
                     startActivity(intent);
                     return true;
             }

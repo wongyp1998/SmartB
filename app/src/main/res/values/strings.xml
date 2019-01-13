@@ -32,4 +32,5 @@
     <string name="user_profile_picture">User profile picture</string>
     <string name="faculty">Faculty</string>
     <string name="course">Course</string>
+    <string name="reservation_purpose">Reservation Purpose</string>
 </resources>
