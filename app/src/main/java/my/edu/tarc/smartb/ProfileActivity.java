@@ -58,6 +58,15 @@ public class ProfileActivity extends AppCompatActivity {
         contactNo = findViewById(R.id.tvContact);
         btn_logout = findViewById(R.id.btnSignout);
 
+//        Intent intent = getIntent();
+//        String extraName = intent.getStringExtra("name");
+//        String extraEmail = intent.getStringExtra("email");
+//        String extraContactNo = intent.getStringExtra("contactNo");
+//        String extranric = intent.getStringExtra("nric");
+//        String extraStudID = intent.getStringExtra("studID");
+//        String extraProgramme = intent.getStringExtra("programme");
+//        String extraFaculty = intent.getStringExtra("faculty");
+
         // Retrieve data from shared preferences
         String extraName = mPreferences.getString("NAME_KEY","");
         String extraEmail = mPreferences.getString("EMAIL_KEY","");
@@ -130,7 +139,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 return true;
-            default:return super.onOptionsItemSelected(item);
+            
+                default:return super.onOptionsItemSelected(item);
         }
     }
 
@@ -146,7 +156,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 progressDialog.dismiss();
 
-
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
@@ -157,12 +166,13 @@ public class ProfileActivity extends AppCompatActivity {
                         preferencesEditor.putString("ID_KEY",studID);
                         preferencesEditor.putString("EMAIL_KEY",email);
                         preferencesEditor.putString("CONTACT_KEY",contactNo);
+                      
                         preferencesEditor.apply();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressDialog.dismiss();
+                  
                     Toast.makeText(ProfileActivity.this,"JSONError" + e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
@@ -183,6 +193,7 @@ public class ProfileActivity extends AppCompatActivity {
                 params.put("contactNo",contactNo);
                 params.put("studID",studID) ;
                 return params;
+
             }
         };
 
