@@ -74,10 +74,9 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(success.equals("1")){
 
-                                for(int i = 0; i < jsonArray.length(); i++) {
+                                for(int i = 0; i < jsonArray.length(); i++){
 
                                     JSONObject object = jsonArray.getJSONObject(i);
-
 
                                     // To display the toast which says the status of login
                                     String studID = object.getString("studID").trim();
@@ -90,17 +89,17 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                     SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                                    preferencesEditor.putString("ID_KEY", studID);
-                                    preferencesEditor.putString("NAME_KEY", name);
-                                    preferencesEditor.putString("PROGRAMME_KEY", programme);
-                                    preferencesEditor.putString("FACULTY_KEY", faculty);
-                                    preferencesEditor.putString("EMAIL_KEY", email);
-                                    preferencesEditor.putString("CONTACT_KEY", contactNo);
-                                    preferencesEditor.putString("NRIC_KEY", nric);
+                                    preferencesEditor.putString("ID_KEY",studID);
+                                    preferencesEditor.putString("NAME_KEY",name);
+                                    preferencesEditor.putString("PROGRAMME_KEY",programme);
+                                    preferencesEditor.putString("FACULTY_KEY",faculty);
+                                    preferencesEditor.putString("EMAIL_KEY",email);
+                                    preferencesEditor.putString("CONTACT_KEY",contactNo);
+                                    preferencesEditor.putString("NRIC_KEY",nric);
 
                                     preferencesEditor.apply();
 
-                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 //                                    intent.putExtra("name",name);
 //                                    intent.putExtra("studID",studID);
 //                                    intent.putExtra("programme",programme);
@@ -110,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
 //                                    intent.putExtra("nric",nric);
                                     startActivity(intent);
                                 }
-
                             } else {
                                 Toast.makeText(LoginActivity.this,
                                         "Failed to login", Toast.LENGTH_SHORT).show();

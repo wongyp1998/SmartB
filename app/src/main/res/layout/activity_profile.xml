@@ -123,7 +123,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -149,13 +150,15 @@
                 android:layout_height="36dp"
                 android:src="@drawable/ic_email_blue_24dp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
+                android:inputType="none"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="30dp"
-                android:textStyle="bold" />
+                android:paddingLeft="20dp"
+                android:textSize="13dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,13 +169,16 @@
                 android:layout_height="36dp"
                 android:src="@drawable/ic_contact_phone_blue_24dp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/tvContact"
-                android:layout_width="wrap_content"
+                android:inputType="none"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="13dp"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="30dp"
-                android:textStyle="bold" />
+                android:paddingLeft="20dp"
+                 />
         </LinearLayout>
     </LinearLayout>
 
