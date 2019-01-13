@@ -70,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
+//                            Validate id or password
+                            String message = jsonObject.getString("message");
+
                             JSONArray jsonArray = jsonObject.getJSONArray("login");
 
                             if(success.equals("1")){
@@ -112,8 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                                 }
 
                             } else {
-                                Toast.makeText(LoginActivity.this,
-                                        "Failed to login", Toast.LENGTH_SHORT).show();
+                                if(message.equals("wrongpass")) {
+                                    Toast.makeText(LoginActivity.this, "Failed to login. Incorrect password.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "ID does not exist.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
